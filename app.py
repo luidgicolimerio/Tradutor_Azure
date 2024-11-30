@@ -34,7 +34,7 @@ def translate_article(text, lang):
           "content": [
             {
               "type": "text",
-              "text": "Você atua como tradutor de textos"
+              "text": "Você é um assiste que atua como tradutor de textos de qualquer idioma para português Brazil."
             }
           ]
         },
@@ -54,18 +54,16 @@ def translate_article(text, lang):
     }
     
     ENDPOINT = azureai_endpoint
-    
-    # Send request
+
     try:
         response = requests.post(ENDPOINT, headers=headers, json=payload)
         response.raise_for_status()  # Will raise an HTTPError if the HTTP request returned an unsuccessful status code
     except requests.RequestException as e:
         raise SystemExit(f"Failed to make the request. Error: {e}")
     
-    # Handle the response as needed (e.g., print or process)
     return (response.json()['choices'][0]['message']['content'])
 
-url = "https://dev.to/eric_dequ/steve-jobs-the-visionary-who-blended-spirituality-and-technology-3ppi"
+url = "https://medium.com/stackademic/is-python-still-the-king-of-data-science-476f1e3191b3"
 text = extract_text(url)
 artigo = translate_article(text,"português")
 print(artigo)
